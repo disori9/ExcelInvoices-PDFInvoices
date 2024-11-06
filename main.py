@@ -3,8 +3,15 @@ import glob
 from fpdf import FPDF
 
 filepaths = glob.glob("invoices/*.xlsx")
+invoice_pdf = FPDF(orientation='P', unit='mm', format='A4')
+invoice_pdf.set_auto_page_break(auto=False, margin=0)
 
 for filepath in filepaths:
     invoice_df = pd.read_excel(filepath, sheet_name='Sheet 1')
-    invoice_nr = filepath[9:14]
-    invoice_date = filepath[15:24]
+    invoice_nr = f'Invoice nr. {filepath[9:14]}'
+    invoice_date = f'Date {filepath[15:24]}'
+
+    invoice_pdf.add_page()
+    invoice_pdf.set_font(family="Times", style="B", size=24)
+    invoice_pdf.cell(w=0, h=12, txt=invoice_nr, align='L', ln=1)
+    invoice_pdf.cell(w=0, h=12, txt=invoice_date, align='L', ln=1)
