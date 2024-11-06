@@ -1,14 +1,16 @@
 import pandas as pd
 import glob
 from fpdf import FPDF
+from pathlib import Path
 
 filepaths = glob.glob("invoices/*.xlsx")
 
 
 for filepath in filepaths:
     invoice_df = pd.read_excel(filepath, sheet_name='Sheet 1')
-    invoice_nr = f'Invoice nr. {filepath[9:14]}'
-    invoice_date = f'Date {filepath[15:24]}'
+    invoice_name = Path(filepath).stem.split("-")
+    invoice_nr = f'Invoice nr. {invoice_name[0]}'
+    invoice_date = f'Date {invoice_name[1]}'
     invoice_pdf = FPDF(orientation='P', unit='mm', format='A4')
     invoice_pdf.set_auto_page_break(auto=False, margin=0)
 
