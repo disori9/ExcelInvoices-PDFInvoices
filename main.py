@@ -3,8 +3,6 @@ import glob
 from fpdf import FPDF
 from pathlib import Path
 
-from openpyxl.descriptors import String
-
 filepaths = glob.glob("invoices/*.xlsx")
 
 
