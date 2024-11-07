@@ -31,6 +31,7 @@ for filepath in filepaths:
     invoice_pdf.cell(w=30, h=8, txt=invoice_columns[4], border=1, ln=1)
 
     # Add table values
+    sum_of_total = 0
     for index, row in invoice_df.iterrows():
         invoice_pdf.set_font(family="Times", size=12)
         invoice_pdf.cell(w=35, h=8, txt=str(row["product_id"]), border=1)
@@ -38,6 +39,14 @@ for filepath in filepaths:
         invoice_pdf.cell(w=39, h=8, txt=str(row["amount_purchased"]), border=1)
         invoice_pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), border=1)
         invoice_pdf.cell(w=30, h=8, txt=str(row["total_price"]), border=1, ln=1)
+        sum_of_total += row['total_price']
+
+    invoice_pdf.set_font(family="Times", size=12)
+    invoice_pdf.cell(w=35, h=8, border=1)
+    invoice_pdf.cell(w=60, h=8, border=1)
+    invoice_pdf.cell(w=39, h=8, border=1)
+    invoice_pdf.cell(w=30, h=8, border=1)
+    invoice_pdf.cell(w=30, h=8, txt=str(sum_of_total), border=1, ln=1)
 
 
     invoice_pdf.output(f'PDFs/{invoice_name}.pdf')
