@@ -7,7 +7,6 @@ filepaths = glob.glob("invoices/*.xlsx")
 
 
 for filepath in filepaths:
-    invoice_df = pd.read_excel(filepath, sheet_name='Sheet 1')
     invoice_name = Path(filepath).stem
     invoice_nr = f'Invoice nr. {invoice_name.split("-")[0]}'
     invoice_date = f'Date {invoice_name.split("-")[1]}'
@@ -19,3 +18,5 @@ for filepath in filepaths:
     invoice_pdf.cell(w=0, h=12, txt=invoice_nr, align='L', ln=1)
     invoice_pdf.cell(w=0, h=12, txt=invoice_date, align='L', ln=1)
     invoice_pdf.output(f'PDFs/{invoice_name}.pdf')
+
+    invoice_df = pd.read_excel(filepath, sheet_name='Sheet 1')
