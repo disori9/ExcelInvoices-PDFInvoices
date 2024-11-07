@@ -48,5 +48,11 @@ for filepath in filepaths:
     invoice_pdf.cell(w=30, h=8, border=1)
     invoice_pdf.cell(w=30, h=8, txt=str(sum_of_total), border=1, ln=1)
 
+    invoice_pdf.cell(w=0, h=12, align='L', ln=1)
+    invoice_pdf.set_font(family="Times", style='B', size=15)
+    invoice_pdf.cell(w=0, h=12, txt=f"The total due amount is {sum_of_total} PHP.", align='L', ln=1)
+
+
+
 
     invoice_pdf.output(f'PDFs/{invoice_name}.pdf')
