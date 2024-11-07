@@ -20,12 +20,19 @@ for filepath in filepaths:
     invoice_pdf.cell(w=0, h=12, align='L', ln=1)
 
     invoice_df = pd.read_excel(filepath, sheet_name='Sheet 1')
+    invoice_columns = list(invoice_df.columns)
+    invoice_pdf.set_font(family="Times", size=12, style='B')
+    invoice_pdf.cell(w=35, h=8, txt=invoice_columns[0], border=1)
+    invoice_pdf.cell(w=60, h=8, txt=invoice_columns[1], border=1)
+    invoice_pdf.cell(w=39, h=8, txt=invoice_columns[2], border=1)
+    invoice_pdf.cell(w=30, h=8, txt=invoice_columns[3], border=1)
+    invoice_pdf.cell(w=30, h=8, txt=invoice_columns[4], border=1, ln=1)
 
     for index, row in invoice_df.iterrows():
         invoice_pdf.set_font(family="Times", size=12)
-        invoice_pdf.cell(w=20, h=8, txt=str(row["product_id"]), border=1)
-        invoice_pdf.cell(w=70, h=8, txt=row["product_name"], border=1)
-        invoice_pdf.cell(w=15, h=8, txt=str(row["amount_purchased"]), border=1)
+        invoice_pdf.cell(w=35, h=8, txt=str(row["product_id"]), border=1)
+        invoice_pdf.cell(w=60, h=8, txt=row["product_name"], border=1)
+        invoice_pdf.cell(w=39, h=8, txt=str(row["amount_purchased"]), border=1)
         invoice_pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), border=1)
         invoice_pdf.cell(w=30, h=8, txt=str(row["total_price"]), border=1, ln=1)
 
