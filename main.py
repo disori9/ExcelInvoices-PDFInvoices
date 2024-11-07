@@ -13,12 +13,14 @@ for filepath in filepaths:
     invoice_pdf = FPDF(orientation='P', unit='mm', format='A4')
     invoice_pdf.set_auto_page_break(auto=False, margin=0)
 
+    # Add invoice information
     invoice_pdf.add_page()
     invoice_pdf.set_font(family="Times", style="B", size=24)
     invoice_pdf.cell(w=0, h=12, txt=invoice_nr, align='L', ln=1)
     invoice_pdf.cell(w=0, h=12, txt=invoice_date, align='L', ln=1)
     invoice_pdf.cell(w=0, h=12, align='L', ln=1)
 
+    # Add table header
     invoice_df = pd.read_excel(filepath, sheet_name='Sheet 1')
     invoice_columns = list(invoice_df.columns)
     invoice_pdf.set_font(family="Times", size=12, style='B')
@@ -28,6 +30,7 @@ for filepath in filepaths:
     invoice_pdf.cell(w=30, h=8, txt=invoice_columns[3], border=1)
     invoice_pdf.cell(w=30, h=8, txt=invoice_columns[4], border=1, ln=1)
 
+    # Add table values
     for index, row in invoice_df.iterrows():
         invoice_pdf.set_font(family="Times", size=12)
         invoice_pdf.cell(w=35, h=8, txt=str(row["product_id"]), border=1)
