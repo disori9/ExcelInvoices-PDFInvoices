@@ -19,6 +19,7 @@ for filepath in filepaths:
     invoice_pdf.set_font(family="Times", style="B", size=24)
     invoice_pdf.cell(w=0, h=12, txt=invoice_nr, align='L', ln=1)
     invoice_pdf.cell(w=0, h=12, txt=invoice_date, align='L', ln=1)
+    invoice_pdf.cell(w=0, h=12, align='L', ln=1)
 
     invoice_df = pd.read_excel(filepath, sheet_name='Sheet 1')
 
