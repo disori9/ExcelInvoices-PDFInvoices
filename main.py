@@ -22,7 +22,7 @@ for filepath in filepaths:
 
     # Add table header
     invoice_df = pd.read_excel(filepath, sheet_name='Sheet 1')
-    invoice_columns = list(invoice_df.columns)
+    invoice_columns = [column.replace("_", " ").title() for column in invoice_df.columns]
     invoice_pdf.set_font(family="Times", size=12, style='B')
     invoice_pdf.cell(w=35, h=8, txt=invoice_columns[0], border=1)
     invoice_pdf.cell(w=60, h=8, txt=invoice_columns[1], border=1)
